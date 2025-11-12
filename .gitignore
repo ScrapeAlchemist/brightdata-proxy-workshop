@@ -1,0 +1,32 @@
+# Environment variables with sensitive credentials
+.env
+
+# Node modules
+node_modules/
+
+# Scraping results
+results/
+sbr_results/
+
+# Screenshots
+*.png
+*.jpg
+*.jpeg
+
+# HTML outputs
+*.html
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
