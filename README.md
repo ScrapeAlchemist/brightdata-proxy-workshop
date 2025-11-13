@@ -9,7 +9,7 @@ Welcome to the Bright Data web scraping workshop! This hands-on workshop demonst
 <td width="50%" valign="top">
 
 ### 🟨 JavaScript
-**[Get Started with JavaScript →](javascript/)**
+**[Get Started with JavaScript](javascript/)**
 
 **Best for:**
 - Node.js developers
@@ -24,7 +24,7 @@ Welcome to the Bright Data web scraping workshop! This hands-on workshop demonst
 <td width="50%" valign="top">
 
 ### 🐍 Python
-**[Get Started with Python →](python/)**
+**[Get Started with Python](python/)**
 
 **Best for:**
 - Python developers
