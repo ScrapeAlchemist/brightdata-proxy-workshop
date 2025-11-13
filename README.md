@@ -100,7 +100,7 @@ MANAGED SOLUTIONS (No headers/cookies hassle):
 
 ## Workshop Scripts
 
-### 1. Simple HTTP Request ([simple_request.js](scr/simple_request.js))
+### 1. Simple HTTP Request ([simple_request.js](src/simple_request.js))
 
 **💰 Cost Level:** CHEAPEST (Datacenter) or MODERATE (Residential)
 
@@ -130,7 +130,7 @@ npm run simple
 
 ---
 
-### 2. Browser with Proxy ([browser_with_proxy.js](scr/browser_with_proxy.js))
+### 2. Browser with Proxy ([browser_with_proxy.js](src/browser_with_proxy.js))
 
 **💰 Cost Level:** CHEAP (Datacenter) or MODERATE (Residential)
 
@@ -161,7 +161,7 @@ npm run browser
 
 ---
 
-### 3. Web Unlocker Demo ([unlocker_demo.js](scr/unlocker_demo.js))
+### 3. Web Unlocker Demo ([unlocker_demo.js](src/unlocker_demo.js))
 
 **What it demonstrates:**
 - Direct comparison: Regular proxy vs Web Unlocker
@@ -193,7 +193,7 @@ npm run unlocker
 
 ---
 
-### 4. Scraping Browser ([remote_browser.js](scr/remote_browser.js))
+### 4. Scraping Browser ([remote_browser.js](src/remote_browser.js))
 
 **What it demonstrates:**
 - Remote browser with automatic unique fingerprints
@@ -300,7 +300,7 @@ Web Unlocker and Scraping Browser handle the complexity for you:
 
 ```
 .
-├── scr/
+├── src/
 │   ├── simple_request.js         # Demo 1: Simple HTTP (headers/cookies impact)
 │   ├── browser_with_proxy.js     # Demo 2: Browser + Proxy (headers/cookies in browser)
 │   ├── unlocker_demo.js          # Demo 3: Web Unlocker comparison
