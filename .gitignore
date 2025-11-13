@@ -1,10 +1,28 @@
 # Environment variables with sensitive credentials
 .env
 
-# Node modules
+# Node.js
 node_modules/
+npm-debug.log*
+javascript/node_modules/
+javascript/results/
+javascript/sbr_results/
 
-# Scraping results
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+python/venv/
+python/env/
+python/results/
+python/sbr_results/
+
+# Scraping results (legacy paths)
 results/
 sbr_results/
 
@@ -18,7 +36,6 @@ sbr_results/
 
 # Logs
 *.log
-npm-debug.log*
 
 # OS files
 .DS_Store
@@ -30,3 +47,6 @@ Thumbs.db
 *.swp
 *.swo
 *~
+
+# Claude Code
+.claude/

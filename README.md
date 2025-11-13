@@ -2,6 +2,45 @@
 
 Welcome to the Bright Data web scraping workshop! This hands-on workshop demonstrates how to choose the right scraping solution based on your needs, optimize for cost efficiency, and maximize success rates.
 
+**Available in two languages:**
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
+### 🟨 JavaScript
+**[Get Started with JavaScript →](javascript/)**
+
+**Best for:**
+- Node.js developers
+- Quick prototyping
+- npm ecosystem
+
+**Requirements:**
+- Node.js 18+
+- npm
+
+</td>
+<td width="50%" valign="top">
+
+### 🐍 Python
+**[Get Started with Python →](python/)**
+
+**Best for:**
+- Python developers
+- Data science workflows
+- pip ecosystem
+
+**Requirements:**
+- Python 3.8+
+- pip
+
+</td>
+</tr>
+</table>
+
+---
+
 ## Workshop Learning Objectives
 
 By the end of this workshop, you'll understand:
@@ -15,54 +54,13 @@ By the end of this workshop, you'll understand:
 
 ## Prerequisites
 
-- Node.js 18 or higher
-- Google Chrome browser installed
 - Bright Data account with active zones:
   - Datacenter Proxy Zone
   - Web Unlocker Zone
   - Scraping Browser Zone
-
----
-
-## Quick Setup
-
-### 1. Install Dependencies
-
-```bash
-npm install
-```
-
-### 2. Configure Credentials
-
-Copy the example environment file and add your credentials:
-
-```bash
-cp .env.example .env
-```
-
-Edit `.env` with your Bright Data credentials from the [Dashboard](https://brightdata.com/cp/zones):
-
-```env
-BRIGHTDATA_CUSTOMER_ID=hl_xxxxxxxx
-
-DATACENTER_ZONE=datacenter_proxy
-DATACENTER_PASSWORD=your_datacenter_password
-
-RESIDENTIAL_ZONE=residential_proxy
-RESIDENTIAL_PASSWORD=your_residential_password
-
-WEB_UNLOCKER_ZONE=unlocker
-WEB_UNLOCKER_PASSWORD=your_unlocker_password
-
-SCRAPING_BROWSER_ZONE=scraping_browser
-SCRAPING_BROWSER_PASSWORD=your_scraping_browser_password
-```
-
-### 3. Create Output Directories
-
-```bash
-mkdir results sbr_results
-```
+  - Residential Proxy Zone (optional)
+- Google Chrome browser installed (for browser-based scripts)
+- Your chosen programming language runtime (Node.js or Python)
 
 ---
 
@@ -72,14 +70,14 @@ mkdir results sbr_results
 
 ```
 PROXY OPTIONS (cheapest → more expensive):
-├─ Datacenter Proxy + Simple HTTP Request     [simple_request.js]
-├─ Datacenter Proxy + Browser                 [browser_with_proxy.js]
-├─ Residential Proxy + Simple HTTP Request    [simple_request.js - swap zone]
-└─ Residential Proxy + Browser                [browser_with_proxy.js - swap zone]
+├─ Datacenter Proxy + Simple HTTP Request
+├─ Datacenter Proxy + Browser
+├─ Residential Proxy + Simple HTTP Request
+└─ Residential Proxy + Browser
 
 MANAGED SOLUTIONS (No headers/cookies hassle):
-├─ Web Unlocker (for simple requests)         [unlocker_demo.js]
-└─ Scraping Browser (for dynamic sites)       [remote_browser.js]
+├─ Web Unlocker (for simple requests)
+└─ Scraping Browser (for dynamic sites)
 ```
 
 ### Decision Framework
@@ -98,128 +96,61 @@ MANAGED SOLUTIONS (No headers/cookies hassle):
 
 ---
 
-## Workshop Scripts
+## Important: Default Configurations Vary by Language
 
-### 1. Simple HTTP Request ([simple_request.js](src/simple_request.js))
+For easier demonstration and comparison, some scripts have different default settings between JavaScript and Python:
 
-**💰 Cost Level:** CHEAPEST (Datacenter) or MODERATE (Residential)
+| Script | Configuration | JavaScript | Python | Why Different? |
+|--------|--------------|------------|--------|----------------|
+| simple_request | USE_HEADERS | `false` | `False` | Shows impact of adding headers |
+| browser_with_proxy | USE_RESIDENTIAL | `false` | `True` | Demonstrates both proxy types |
+| unlocker_demo | USE_WEB_UNLOCKER | `true` | `False` | Shows regular vs unlocker comparison |
+| remote_browser | USE_SCRAPING_BROWSER | `false` | `False` | Both start in local mode |
 
-**What it demonstrates:**
-- Basic HTTP requests through proxies (Datacenter or Residential)
+These intentional differences let you see varied behaviors by default. Check the language-specific READMEs for complete configuration options.
+
+---
+
+## Workshop Demonstrations
+
+Both JavaScript and Python versions include 4 core demonstrations:
+
+### 1. Simple HTTP Request
+**Cost Level:** CHEAPEST (Datacenter) or MODERATE (Residential)
+
+Demonstrates:
+- Basic HTTP requests through proxies
 - Impact of headers and cookies on success rate
 - Baseline for cost-efficient scraping
-- Compare Datacenter vs Residential IPs by swapping zones
+- Compare Datacenter vs Residential IPs
 
-**Success Rate Demo:**
-1. Run with `USE_HEADERS = false` and `USE_COOKIES = false` → High block rate
-2. Enable `USE_COOKIES = true` → Better success rate
-3. Enable both `USE_HEADERS = true` and `USE_COOKIES = true` → Best success rate
-4. Switch `USE_RESIDENTIAL = true` in the script → See impact of Residential IPs on success rate
+### 2. Browser with Proxy
+**Cost Level:** CHEAP (Datacenter) or MODERATE (Residential)
 
-**Run it:**
-```bash
-npm run simple
-```
-
-**Key Takeaways:**
-- Cheapest option for high-volume scraping (Datacenter)
-- Adding proper headers/cookies dramatically improves success
-- Easy switch between Datacenter and Residential with `USE_RESIDENTIAL` flag
-- Works great for public data and sites without heavy bot protection
-- When this fails → upgrade to Web Unlocker
-
----
-
-### 2. Browser with Proxy ([browser_with_proxy.js](src/browser_with_proxy.js))
-
-**💰 Cost Level:** CHEAP (Datacenter) or MODERATE (Residential)
-
-**What it demonstrates:**
-- Using real Chrome browser with proxies (Datacenter or Residential)
-- Browser automatically handles JavaScript rendering
-- Headers/cookies impact in browser context
+Demonstrates:
+- Using real browser with proxies
+- JavaScript rendering handling
+- Headers/cookies in browser context
 - Request blocking for efficiency
-- Compare Datacenter vs Residential by swapping zones
 
-**Success Rate Demo:**
-1. Run with `USE_HEADERS = false` and `USE_COOKIES = false` → May get blocked
-2. Enable `USE_HEADERS = true` → Better browser fingerprint
-3. Enable `USE_COOKIES = true` → Maintains session state
-4. Switch `USE_RESIDENTIAL = true` in the script → See impact of Residential IPs on success rate
+### 3. Web Unlocker Demo
+**Cost Level:** HIGHER (but automated)
 
-**Run it:**
-```bash
-npm run browser
-```
-
-**Key Takeaways:**
-- Use when target site requires JavaScript rendering
-- Cost-effective with Datacenter, higher success with Residential
-- Real browser = more realistic fingerprint than HTTP
-- Can test both proxy types by changing zone in `.env`
-- When this fails → upgrade to Scraping Browser
-
----
-
-### 3. Web Unlocker Demo ([unlocker_demo.js](src/unlocker_demo.js))
-
-**What it demonstrates:**
+Demonstrates:
 - Direct comparison: Regular proxy vs Web Unlocker
-- How Web Unlocker automatically handles blocks and CAPTCHAs
-- No need to manually configure headers or cookies
+- Automatic CAPTCHA solving
+- No manual header/cookie configuration
 - Success rate improvement on protected sites
 
-**Success Rate Demo:**
-1. Run with `WU = false` (Regular Proxy) → High failure rate on ah.nl
-2. Run with `WU = true` (Web Unlocker) → High success rate, no blocks
-3. Compare results in `results/` folder
-4. Check `results/test--failed*.json` for error details
+### 4. Scraping Browser
+**Cost Level:** HIGHEST (but maximum success)
 
-**Run it:**
-```bash
-# First try with Regular Proxy (WU = false)
-npm run unlocker
-
-# Then change WU = true in the file and run again
-npm run unlocker
-```
-
-**Key Takeaways:**
-- Web Unlocker automatically solves CAPTCHAs and handles fingerprinting
-- No need to manage headers, cookies, or retries yourself
-- Higher success rate on protected e-commerce and social media sites
-- Use when regular proxies (DC or Residential) are getting blocked
-- Still uses simple HTTP requests (not a browser)
-
----
-
-### 4. Scraping Browser ([remote_browser.js](src/remote_browser.js))
-
-**What it demonstrates:**
-- Remote browser with automatic unique fingerprints
-- Connects via WebSocket to Bright Data's hosted browsers
-- Automatic CAPTCHA solving when encountered
-- Chrome DevTools integration for debugging
-- Can scale to multiple parallel browser sessions
-
-**Success Rate Demo:**
-1. Try connecting to Lazada with local browser + regular proxy → May get blocked/CAPTCHA
-2. Switch `useSB = true` (Scraping Browser) → Automatic success
-3. Each session gets a unique fingerprint and IP
-4. CAPTCHAs are solved automatically in the background
-
-**Run it:**
-```bash
-npm run remote-browser
-```
-
-**Key Takeaways:**
-- Use for JavaScript-heavy sites that require browser interaction
-- Automatic fingerprint generation (no manual configuration)
-- Built-in CAPTCHA solving
-- Can run hundreds of parallel browser sessions
-- Real-time debugging with Chrome DevTools
-- Use when regular browser + proxy fails or you need to interact with dynamic content
+Demonstrates:
+- Remote browser with automatic fingerprints
+- WebSocket connection to hosted browsers
+- Automatic CAPTCHA solving
+- Chrome DevTools integration
+- Scalable to hundreds of parallel sessions
 
 ---
 
@@ -270,48 +201,59 @@ Web Unlocker and Scraping Browser handle the complexity for you:
 
 ---
 
-## Troubleshooting
+## Getting Started
 
-### Error: 407 Proxy Authentication Required
-- Check your `BRIGHTDATA_CUSTOMER_ID` and `BRIGHTDATA_PASSWORD` in `.env`
-- Verify zone names are correct (case-sensitive)
-- Ensure zones are active in Bright Data dashboard
+### Choose Your Language:
 
-### Getting Blocked Even with Headers/Cookies
-- Consider upgrading to Web Unlocker (for HTTP) or Scraping Browser (for browser)
-- Check if site requires Residential IPs (geo-restrictions)
-- Reduce request rate (may be rate-limited)
+**JavaScript Developers:**
+```bash
+cd javascript
+npm install
+cp .env.example .env
+# Edit .env with your credentials
+npm run simple
+```
 
-### Chrome Not Found (browser_with_proxy.js)
-- Install Google Chrome browser
-- Update `CHROME_PATH` in the script if non-standard location
-  - Windows: `C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe`
-  - Mac: `/Applications/Google Chrome.app/Contents/MacOS/Google Chrome`
-  - Linux: `/usr/bin/google-chrome`
-
-### Connection Timeout
-- Check internet connection
-- Verify zone is active in Bright Data dashboard
-- Try increasing timeout value in script
+**Python Developers:**
+```bash
+cd python
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+playwright install chromium
+cp .env.example .env
+# Edit .env with your credentials
+python src/simple_request.py
+```
 
 ---
 
-## Workshop Files Structure
+## Repository Structure
 
 ```
 .
-├── src/
-│   ├── simple_request.js         # Demo 1: Simple HTTP (headers/cookies impact)
-│   ├── browser_with_proxy.js     # Demo 2: Browser + Proxy (headers/cookies in browser)
-│   ├── unlocker_demo.js          # Demo 3: Web Unlocker comparison
-│   ├── remote_browser.js         # Demo 4: Scraping Browser (auto-fingerprint + CAPTCHA)
-│   └── open_chrome.js            # Helper: Chrome DevTools integration
-├── results/                      # HTTP scraping outputs
-├── sbr_results/                  # Scraping Browser outputs
-├── .env.example                  # Credentials template
-├── .env                          # Your credentials (git-ignored)
-├── package.json                  # Dependencies & scripts
-└── README.md                     # This guide
+├── javascript/                   # JavaScript implementation
+│   ├── src/
+│   │   ├── simple_request.js
+│   │   ├── browser_with_proxy.js
+│   │   ├── unlocker_demo.js
+│   │   ├── remote_browser.js
+│   │   └── open_chrome.js
+│   ├── package.json
+│   ├── .env.example
+│   └── README.md
+├── python/                       # Python implementation
+│   ├── src/
+│   │   ├── simple_request.py
+│   │   ├── browser_with_proxy.py
+│   │   ├── unlocker_demo.py
+│   │   ├── remote_browser.py
+│   │   └── open_chrome.py
+│   ├── requirements.txt
+│   ├── .env.example
+│   └── README.md
+├── .gitignore
+└── README.md                     # This file
 ```
 
 ---
@@ -329,12 +271,42 @@ Web Unlocker and Scraping Browser handle the complexity for you:
 
 ---
 
+## Troubleshooting
+
+### Error: 407 Proxy Authentication Required
+- Check your `BRIGHTDATA_CUSTOMER_ID` and passwords in `.env`
+- Verify zone names are correct (case-sensitive)
+- Ensure zones are active in Bright Data dashboard
+
+### Getting Blocked Even with Headers/Cookies
+- Consider upgrading to Web Unlocker (for HTTP) or Scraping Browser (for browser)
+- Check if site requires Residential IPs (geo-restrictions)
+- Reduce request rate (may be rate-limited)
+
+### Chrome/Browser Not Found
+- Install Google Chrome browser
+- Update browser path in scripts if non-standard location
+
+### Connection Timeout
+- Check internet connection
+- Verify zone is active in Bright Data dashboard
+- Try increasing timeout value in script
+
+---
+
 ## Additional Resources
 
 - [Bright Data Documentation](https://docs.brightdata.com/)
 - [Web Unlocker Features](https://docs.brightdata.com/scraping-automation/web-unlocker/features)
 - [Scraping Browser Guide](https://docs.brightdata.com/scraping-automation/scraping-browser/)
 - [Pricing](https://brightdata.com/pricing)
+
+---
+
+## Language-Specific Documentation
+
+- **[JavaScript Setup & Scripts →](javascript/README.md)**
+- **[Python Setup & Scripts →](python/README.md)**
 
 ---
 

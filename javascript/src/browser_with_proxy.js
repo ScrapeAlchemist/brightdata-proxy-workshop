@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config({ path: require('path').join(__dirname, '..', '.env') });
 const puppeteer = require('puppeteer-core');
 
 // ============================================================================
@@ -6,7 +6,7 @@ const puppeteer = require('puppeteer-core');
 // ============================================================================
 
 const TARGET_URL = 'https://www.amazon.in/dp/B0CS5XW6TN/';
-const USE_RESIDENTIAL = true;
+const USE_RESIDENTIAL = false;
 const USE_REAL_BROWSER = true;
 const BLOCK_REQUESTS = false;
 const USE_HEADERS = true;
@@ -108,7 +108,7 @@ async function run() {
 
     console.log(`Loading: ${TARGET_URL}`);
     await page.goto(TARGET_URL, { waitUntil: 'domcontentloaded', timeout: 60000 });
-    await page.waitForTimeout(10000);
+    await new Promise(resolve => setTimeout(resolve, 10000));
 
     const domain = new URL(TARGET_URL).hostname;
     const screenshotPath = `screenshot_${domain}.png`;

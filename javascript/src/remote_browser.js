@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config({ path: require('path').join(__dirname, '..', '.env') });
 const puppeteer = require('puppeteer-core');
 const fs = require('fs');
 const {open_chrome_with_url} = require('./open_chrome.js');

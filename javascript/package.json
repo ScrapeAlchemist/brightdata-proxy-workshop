@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "simple": "node scr/simple_request.js",
-    "browser": "node scr/browser_with_proxy.js",
-    "unlocker": "node scr/unlocker_demo.js",
-    "remote-browser": "node scr/remote_browser.js"
+    "simple": "node src/simple_request.js",
+    "browser": "node src/browser_with_proxy.js",
+    "unlocker": "node src/unlocker_demo.js",
+    "remote-browser": "node src/remote_browser.js"
   },
   "keywords": [
     "brightdata",
