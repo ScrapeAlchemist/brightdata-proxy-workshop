@@ -8,7 +8,8 @@
     "simple": "node src/simple_request.js",
     "browser": "node src/browser_with_proxy.js",
     "unlocker": "node src/unlocker_demo.js",
-    "remote-browser": "node src/remote_browser.js"
+    "remote-browser": "node src/remote_browser.js",
+    "serp": "node src/serp_api_demo.js"
   },
   "keywords": [
     "brightdata",

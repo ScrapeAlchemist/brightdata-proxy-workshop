@@ -11,6 +11,7 @@ This is the JavaScript implementation of the Bright Data web scraping workshop. 
   - Residential Proxy Zone (optional)
   - Web Unlocker Zone
   - Scraping Browser Zone
+  - SERP API Zone
 
 ---
 
@@ -46,6 +47,9 @@ WEB_UNLOCKER_PASSWORD=your_unlocker_password
 
 SCRAPING_BROWSER_ZONE=scraping_browser
 SCRAPING_BROWSER_PASSWORD=your_scraping_browser_password
+
+SERP_API_TOKEN=your_serp_api_token
+SERP_API_ZONE=serp
 ```
 
 ---
@@ -159,6 +163,40 @@ npm run remote-browser
 
 ---
 
+### 5. SERP API Demo ([serp_api_demo.js](src/serp_api_demo.js))
+
+**What it demonstrates:**
+- Search engine scraping via Bright Data SERP API
+- Supports Google, Bing, and DuckDuckGo
+- Automatic JSON parsing with `brd_json=1`
+- Country and language targeting for Google searches
+- Uses Bearer token authentication (not proxy credentials)
+
+**Run it:**
+```bash
+npm run serp
+```
+
+**Configuration:**
+- `SEARCH_QUERY` - The search term to query
+- `SEARCH_ENGINE` - Which engine to use: `"google"`, `"bing"`, or `"duckduckgo"`
+- `USE_JSON_PARSING` - Toggle structured JSON output vs raw HTML
+- `COUNTRY` - Country code for geo-targeting (Google only)
+- `LANGUAGE` - Language code for results (Google only)
+- `NUM_REQUESTS` - Number of parallel requests
+
+**Default Configuration:**
+- `SEARCH_QUERY`: `"web scraping tutorial"`
+- `SEARCH_ENGINE`: `"google"`
+- `USE_JSON_PARSING`: `true` (returns structured JSON)
+- `COUNTRY`: `"us"`
+- `LANGUAGE`: `"en"`
+- `NUM_REQUESTS`: `5`
+
+**Note:** SERP API uses direct API calls with Bearer token, not proxy-based requests.
+
+---
+
 ## NPM Scripts
 
 Defined in `package.json`:
@@ -169,7 +207,8 @@ Defined in `package.json`:
     "simple": "node src/simple_request.js",
     "browser": "node src/browser_with_proxy.js",
     "unlocker": "node src/unlocker_demo.js",
-    "remote-browser": "node src/remote_browser.js"
+    "remote-browser": "node src/remote_browser.js",
+    "serp": "node src/serp_api_demo.js"
   }
 }
 ```
@@ -240,7 +279,8 @@ Both implementations follow the same workshop structure and concepts!
 2. Toggle headers/cookies to see their impact
 3. Try [browser_with_proxy.js](src/browser_with_proxy.js) for JavaScript-heavy sites
 4. Test [unlocker_demo.js](src/unlocker_demo.js) to see Web Unlocker in action
-5. Use [remote_browser.js](src/remote_browser.js) for maximum success rates
+5. Use [serp_api_demo.js](src/serp_api_demo.js) for search engine scraping
+6. Use [remote_browser.js](src/remote_browser.js) for maximum success rates
 
 ---
 

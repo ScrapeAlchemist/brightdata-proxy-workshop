@@ -11,6 +11,7 @@ This is the Python implementation of the Bright Data web scraping workshop. Lear
   - Residential Proxy Zone (optional)
   - Web Unlocker Zone
   - Scraping Browser Zone
+  - SERP API Zone
 
 ---
 
@@ -61,6 +62,9 @@ WEB_UNLOCKER_PASSWORD=your_unlocker_password
 
 SCRAPING_BROWSER_ZONE=scraping_browser
 SCRAPING_BROWSER_PASSWORD=your_scraping_browser_password
+
+SERP_API_TOKEN=your_serp_api_token
+SERP_API_ZONE=serp
 ```
 
 ---
@@ -176,6 +180,40 @@ python src/remote_browser.py
 
 ---
 
+### 5. SERP API Demo ([serp_api_demo.py](src/serp_api_demo.py))
+
+**What it demonstrates:**
+- Search engine scraping via Bright Data SERP API
+- Supports Google, Bing, and DuckDuckGo
+- Automatic JSON parsing with `brd_json=1`
+- Country and language targeting for Google searches
+- Uses Bearer token authentication (not proxy credentials)
+
+**Run it:**
+```bash
+python src/serp_api_demo.py
+```
+
+**Configuration:**
+- `SEARCH_QUERY` - The search term to query
+- `SEARCH_ENGINE` - Which engine to use: `"google"`, `"bing"`, or `"duckduckgo"`
+- `USE_JSON_PARSING` - Toggle structured JSON output vs raw HTML
+- `COUNTRY` - Country code for geo-targeting (Google only)
+- `LANGUAGE` - Language code for results (Google only)
+- `NUM_REQUESTS` - Number of parallel requests
+
+**Default Configuration:**
+- `SEARCH_QUERY`: `"web scraping tutorial"`
+- `SEARCH_ENGINE`: `"google"`
+- `USE_JSON_PARSING`: `False` (returns raw HTML - different from JavaScript)
+- `COUNTRY`: `"us"`
+- `LANGUAGE`: `"en"`
+- `NUM_REQUESTS`: `5`
+
+**Note:** SERP API uses direct API calls with Bearer token, not proxy-based requests. Default is `False` for `USE_JSON_PARSING` (different from JavaScript which defaults to `True`).
+
+---
+
 ## Key Python Libraries Used
 
 ### aiohttp
@@ -244,7 +282,8 @@ Both implementations follow the same workshop structure and concepts!
 2. Toggle headers/cookies to see their impact
 3. Try [browser_with_proxy.py](src/browser_with_proxy.py) for JavaScript-heavy sites
 4. Test [unlocker_demo.py](src/unlocker_demo.py) to see Web Unlocker in action
-5. Use [remote_browser.py](src/remote_browser.py) for maximum success rates
+5. Use [serp_api_demo.py](src/serp_api_demo.py) for search engine scraping
+6. Use [remote_browser.py](src/remote_browser.py) for maximum success rates
 
 ---
 

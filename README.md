@@ -58,6 +58,7 @@ By the end of this workshop, you'll understand:
   - Datacenter Proxy Zone
   - Web Unlocker Zone
   - Scraping Browser Zone
+  - SERP API Zone
   - Residential Proxy Zone (optional)
 - Google Chrome browser installed (for browser-based scripts)
 - Your chosen programming language runtime (Node.js or Python)
@@ -77,6 +78,7 @@ PROXY OPTIONS (cheapest → more expensive):
 
 MANAGED SOLUTIONS (No headers/cookies hassle):
 ├─ Web Unlocker (for simple requests)
+├─ SERP API (for search engine results)
 └─ Scraping Browser (for dynamic sites)
 ```
 
@@ -106,6 +108,7 @@ For easier demonstration and comparison, some scripts have different default set
 | browser_with_proxy | USE_RESIDENTIAL | `false` | `True` | Demonstrates both proxy types |
 | unlocker_demo | USE_WEB_UNLOCKER | `true` | `False` | Shows regular vs unlocker comparison |
 | remote_browser | USE_SCRAPING_BROWSER | `false` | `False` | Both start in local mode |
+| serp_api_demo | USE_JSON_PARSING | `true` | `False` | Shows JSON vs raw HTML output |
 
 These intentional differences let you see varied behaviors by default. Check the language-specific READMEs for complete configuration options.
 
@@ -113,7 +116,7 @@ These intentional differences let you see varied behaviors by default. Check the
 
 ## Workshop Demonstrations
 
-Both JavaScript and Python versions include 4 core demonstrations:
+Both JavaScript and Python versions include 5 core demonstrations:
 
 ### 1. Simple HTTP Request
 **Cost Level:** CHEAPEST (Datacenter) or MODERATE (Residential)
@@ -151,6 +154,16 @@ Demonstrates:
 - Automatic CAPTCHA solving
 - Chrome DevTools integration
 - Scalable to hundreds of parallel sessions
+
+### 5. SERP API Demo
+**Cost Level:** MODERATE (managed, pay-per-success)
+
+Demonstrates:
+- Search engine scraping (Google, Bing, DuckDuckGo)
+- Automatic JSON parsing with `brd_json=1`
+- Country and language targeting
+- No manual header/cookie configuration
+- 99.9% success rate on search results
 
 ---
 
@@ -238,6 +251,7 @@ python src/simple_request.py
 │   │   ├── browser_with_proxy.js
 │   │   ├── unlocker_demo.js
 │   │   ├── remote_browser.js
+│   │   ├── serp_api_demo.js
 │   │   └── open_chrome.js
 │   ├── package.json
 │   ├── .env.example
@@ -248,6 +262,7 @@ python src/simple_request.py
 │   │   ├── browser_with_proxy.py
 │   │   ├── unlocker_demo.py
 │   │   ├── remote_browser.py
+│   │   ├── serp_api_demo.py
 │   │   └── open_chrome.py
 │   ├── requirements.txt
 │   ├── .env.example
@@ -298,6 +313,7 @@ python src/simple_request.py
 
 - [Bright Data Documentation](https://docs.brightdata.com/)
 - [Web Unlocker Features](https://docs.brightdata.com/scraping-automation/web-unlocker/features)
+- [SERP API Guide](https://docs.brightdata.com/scraping-automation/serp-api/)
 - [Scraping Browser Guide](https://docs.brightdata.com/scraping-automation/scraping-browser/)
 - [Pricing](https://brightdata.com/pricing)
 
